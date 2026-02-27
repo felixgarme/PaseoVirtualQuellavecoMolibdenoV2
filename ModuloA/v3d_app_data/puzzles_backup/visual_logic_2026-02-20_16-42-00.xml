@@ -1,0 +1,37 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="Init" type="InitTab" active="false" scrollx="20" scrolly="20" scale="0.9"></tab>
+  <tab name="New Tab" type="CommonTab" active="true" scrollx="4.324374389648483" scrolly="18.665624999999864" scale="0.9">
+    <block xmlns="https://developers.google.com/blockly/xml" type="connectorSlot" id="VBxu4_hU*=RC)i,Sp1xQ" x="42" y="164">
+      <statement name="DO">
+        <block type="execScript" id="-v+O=cm2kCfeMCG:HsWm">
+          <value name="TEXT">
+            <shadow type="textMultiline" id="t1TDaWqf3#B8`1y%=:!=">
+              <field name="HIGHLIGHT_MODE">javascript</field>
+              <field name="TEXT" editor-height="3" editor-width="520">window.app = app; &amp;#10;import("./imports.js");</field>
+            </shadow>
+          </value>
+          <next>
+            <block type="setTimeout" id="o),Sqnr~neuBM2}?DVCa">
+              <value name="VALUE">
+                <shadow type="math_number" id="DXBs|A}z2v4nTT*u^Cr)">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <statement name="DO">
+                <block type="execScript" id="KGvK-O0/U?p$A_zA,Ymg">
+                  <value name="TEXT">
+                    <shadow type="textMultiline" id="dO%;[q!Q7p)eTARvh4X@">
+                      <field name="HIGHLIGHT_MODE">javascript</field>
+                      <field name="TEXT" editor-height="5" editor-width="520">avatar("asdkjasdjaslkdjlkasd jasjdl kasdjklasdjlkasdjlkasjdaslkdj jsdlkajdaslk","../../resources/audio/a.wav");</field>
+                    </shadow>
+                  </value>
+                </block>
+              </statement>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1180.1999999999998" viewport-y="37" viewport-w="798.8" viewport-h="448.5" viewport-hidden="true" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>

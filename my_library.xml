@@ -1,0 +1,28 @@
+<?xml version="1.0" ?><xml><category name="avatar">
+        <block xmlns="https://developers.google.com/blockly/xml" type="execScript">
+  <value name="TEXT">
+    <shadow type="textMultiline">
+      <field name="HIGHLIGHT_MODE">javascript</field>
+      <field name="TEXT" editor-height="2" editor-width="1597.7777777777778">avatar(&quot;&quot;,&quot;../../resources/audio/formulario.wav&quot;);</field>
+    </shadow>
+  </value>
+</block>
+        </category><category name="avatar">
+        <block xmlns="https://developers.google.com/blockly/xml" type="execScript">
+  <value name="TEXT">
+    <shadow type="textMultiline">
+      <field name="HIGHLIGHT_MODE">javascript</field>
+      <field name="TEXT" editor-height="2" editor-width="486.5277777777778">avatar(&quot;&quot;,&quot;../../resources/audio/formulario.wav&quot;);</field>
+    </shadow>
+  </value>
+</block>
+        </category><category name="camino">
+        <block xmlns="https://developers.google.com/blockly/xml" type="execScript">
+  <value name="TEXT">
+    <shadow type="textMultiline">
+      <field name="HIGHLIGHT_MODE">javascript</field>
+      <field name="TEXT" editor-height="2" editor-width="873.1840436645253">camino([&quot;inicio&quot;, &quot;inicio2&quot;, &quot;inicio3&quot;,&quot;inicio4&quot;, &quot;inicio5&quot;, &quot;inicio6&quot;,&quot;inicio7&quot;],&quot;inicio6&quot;);</field>
+    </shadow>
+  </value>
+</block>
+        </category></xml>

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?><xml><category name="avatar">
+        <block xmlns="https://developers.google.com/blockly/xml" type="execScript">
+  <value name="TEXT">
+    <shadow type="textMultiline">
+      <field name="HIGHLIGHT_MODE">javascript</field>
+      <field name="TEXT" editor-height="2" editor-width="1597.7777777777778">avatar(&quot;&quot;,&quot;../../resources/audio/formulario.wav&quot;);</field>
+    </shadow>
+  </value>
+</block>
+        </category></xml>

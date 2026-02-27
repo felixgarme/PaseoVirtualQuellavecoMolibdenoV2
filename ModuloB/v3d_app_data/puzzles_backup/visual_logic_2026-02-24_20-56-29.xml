@@ -1,0 +1,98 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="Init" type="InitTab" active="false" scrollx="20" scrolly="20" scale="0.9"></tab>
+  <tab name="inicio" type="CommonTab" active="true" scrollx="8.78337368549046" scrolly="-367.8643235496925" scale="1">
+    <block xmlns="https://developers.google.com/blockly/xml" type="connectorSlot" id="VBxu4_hU*=RC)i,Sp1xQ" x="474" y="286">
+      <statement name="DO">
+        <block type="stopAnimation" id="L24*L?W+/%iq|dYOP)4E">
+          <value name="VALUE">
+            <shadow type="animationList" id="#0yi6B$O]/zjQO6#3cze">
+              <field name="FIELDNAME">NPC1</field>
+            </shadow>
+          </value>
+          <next>
+            <block type="setCameraParam" id="f)-WY84BzOlr*9NiOW{B">
+              <mutation xmlns="http://www.w3.org/1999/xhtml" type="ALLOW_PANNING"></mutation>
+              <field name="TYPE">ALLOW_PANNING</field>
+              <value name="ALLOW_PANNING">
+                <shadow type="logic_boolean" id="9%cER;8W!P`_WG_P!h:b">
+                  <field name="BOOL">FALSE</field>
+                </shadow>
+              </value>
+              <value name="OBJECT">
+                <shadow type="objectList" id="iMYkM++6uCj=-15(k0BB">
+                  <field name="FIELDNAME">Camera</field>
+                </shadow>
+              </value>
+              <next>
+                <block type="setCameraParam" id="~-SoMnDMaEA^u`H@d.U=">
+                  <mutation xmlns="http://www.w3.org/1999/xhtml" type="CLIP_END"></mutation>
+                  <field name="TYPE">CLIP_END</field>
+                  <value name="CLIP_END">
+                    <shadow type="math_number" id="3`_6++M**bO@=])52Ksq">
+                      <field name="NUM">50</field>
+                    </shadow>
+                  </value>
+                  <value name="OBJECT">
+                    <shadow type="objectList" id="XPSQr34`CXhNDP3sEU2q">
+                      <field name="FIELDNAME">Camera</field>
+                    </shadow>
+                  </value>
+                  <next>
+                    <block type="setCameraParam" id="!;++`CCU9desWe8FE6=^">
+                      <mutation xmlns="http://www.w3.org/1999/xhtml" type="ORBIT_MAX_DISTANCE_PERSP"></mutation>
+                      <field name="TYPE">ORBIT_MAX_DISTANCE_PERSP</field>
+                      <value name="ORBIT_MAX_DISTANCE_PERSP">
+                        <shadow type="math_number" id="wSBYo7+wlCCLqz3h}RAh">
+                          <field name="NUM">30</field>
+                        </shadow>
+                      </value>
+                      <value name="OBJECT">
+                        <shadow type="objectList" id="HVK[7s9uuEnrTn,|Nnj7">
+                          <field name="FIELDNAME">Camera</field>
+                        </shadow>
+                      </value>
+                      <next>
+                        <block type="execScript" id="-v+O=cm2kCfeMCG:HsWm">
+                          <value name="TEXT">
+                            <shadow type="textMultiline" id="t1TDaWqf3#B8`1y%=:!=">
+                              <field name="HIGHLIGHT_MODE">javascript</field>
+                              <field name="TEXT" editor-height="3" editor-width="520">window.app = app; &amp;#10;import("./imports.js");</field>
+                            </shadow>
+                          </value>
+                          <next>
+                            <block type="setTimeout" id="Vd_]}_A{BKz=|$G1:D|;">
+                              <value name="VALUE">
+                                <shadow type="math_number" id="j/:(LF3uMVJhB5x|I[)`">
+                                  <field name="NUM">1</field>
+                                </shadow>
+                              </value>
+                              <statement name="DO">
+                                <block type="execScript" id="[iG,JPi0CVfuI*OZPz6a">
+                                  <value name="TEXT">
+                                    <shadow type="textMultiline" id="F(~k[=/ynW5z2ad1.ZqP">
+                                      <field name="HIGHLIGHT_MODE">javascript</field>
+                                      <field name="TEXT" editor-height="3" editor-width="520">v3d.puzzles.procedures["cargado"]();</field>
+                                    </shadow>
+                                  </value>
+                                </block>
+                              </statement>
+                            </block>
+                          </next>
+                        </block>
+                      </next>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+    <block xmlns="https://developers.google.com/blockly/xml" type="procedures_defnoreturn" id=";4Z^%`i]H_(_$Secaz9=" x="482" y="717">
+      <field name="NAME">cargado</field>
+      <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1178.9499999999998" viewport-y="37" viewport-w="798.8" viewport-h="448.5" viewport-hidden="true" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>

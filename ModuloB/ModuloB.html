@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>Modulo B</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="generator" content="Verge3D 4.11.0">
+  <link rel="stylesheet" type="text/css" href="ModuloB.css">
+  <link rel="stylesheet" href="../resources/css/inicio.css">
+
+</head>
+
+<body>
+
+  <div id="loading-screen">
+    <video id="loading-video" autoplay loop muted playsinline>
+      <source src="../resources/video/Video Molibdeno.mp4" type="video/mp4">
+      Tu navegador no soporta la etiqueta de video.
+    </video>
+
+    <div class="loading-card">
+      <img src="../resources/img/logo.png" alt="Logo" class="logo-img">
+      
+      <div id="loading-indicator" class="loader-spinner"></div>
+
+      <button id="iniciar-btn">
+          Iniciar
+          <svg class="btn-arrow" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 1.5L9.1442 8.70512C9.6186 9.15234 9.6186 9.87729 9.1442 10.3245L1.5 17.5296" 
+                    stroke="#FF0000" 
+                    stroke-width="3" 
+                    stroke-linecap="round"/>
+          </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="v3d-container">
+    <div id="fullscreen-button" class="fullscreen-button fullscreen-open" title="Toggle fullscreen mode"
+      aria-hidden="true"></div>
+  </div>
+
+  <script src="v3d.js"></script>
+  <script src="ModuloB.js"></script>
+  <script src="../resources/js/inicio.js"></script>
+</body>
+
+</html>

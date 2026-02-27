@@ -1,0 +1,128 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="Init" type="InitTab" active="false" scrollx="20" scrolly="0" scale="0.9"></tab>
+  <tab name="inicio" type="CommonTab" active="true" scrollx="241.46546325683596" scrolly="-98.10000000000002" scale="0.9">
+    <block xmlns="https://developers.google.com/blockly/xml" type="connectorSlot" id="VBxu4_hU*=RC)i,Sp1xQ" x="42" y="164">
+      <statement name="DO">
+        <block type="setCameraParam" id="~-SoMnDMaEA^u`H@d.U=" disabled="true">
+          <mutation xmlns="http://www.w3.org/1999/xhtml" type="CLIP_END"></mutation>
+          <field name="TYPE">CLIP_END</field>
+          <value name="CLIP_END">
+            <shadow type="math_number" id="3`_6++M**bO@=])52Ksq">
+              <field name="NUM">40</field>
+            </shadow>
+          </value>
+          <value name="OBJECT">
+            <shadow type="objectList" id="XPSQr34`CXhNDP3sEU2q">
+              <field name="FIELDNAME">Camera</field>
+            </shadow>
+          </value>
+          <next>
+            <block type="setCameraParam" id="!;++`CCU9desWe8FE6=^">
+              <mutation xmlns="http://www.w3.org/1999/xhtml" type="ORBIT_MAX_ZOOM_ORTHO"></mutation>
+              <field name="TYPE">ORBIT_MAX_ZOOM_ORTHO</field>
+              <value name="ORBIT_MAX_ZOOM_ORTHO">
+                <shadow type="math_number" id="b^B.wz;Mr{dhu/BcU/UC">
+                  <field name="NUM">5</field>
+                </shadow>
+              </value>
+              <value name="OBJECT">
+                <shadow type="objectList" id="HVK[7s9uuEnrTn,|Nnj7">
+                  <field name="FIELDNAME">Camera</field>
+                </shadow>
+              </value>
+              <next>
+                <block type="execScript" id="-v+O=cm2kCfeMCG:HsWm">
+                  <value name="TEXT">
+                    <shadow type="textMultiline" id="t1TDaWqf3#B8`1y%=:!=">
+                      <field name="HIGHLIGHT_MODE">javascript</field>
+                      <field name="TEXT" editor-height="3" editor-width="520">window.app = app; &amp;#10;import("./imports.js");</field>
+                    </shadow>
+                  </value>
+                  <next>
+                    <block type="setTimeout" id="ccrD_VZ)A/5k[Xc#@wk6">
+                      <value name="VALUE">
+                        <shadow type="math_number" id="7FK%v-oqetn^hlh%,v-+">
+                          <field name="NUM">1</field>
+                        </shadow>
+                      </value>
+                      <statement name="DO">
+                        <block type="execScript" id="D8I-pLz-L5g+:X@Rn+iz">
+                          <value name="TEXT">
+                            <shadow type="textMultiline" id="M_%wR.N4y$Fl+,VU*C1F">
+                              <field name="HIGHLIGHT_MODE">javascript</field>
+                              <field name="TEXT" editor-height="5" editor-width="520">avatar("Hola, bienvenido!","../../resources/audio/bienvenido.wav");</field>
+                            </shadow>
+                          </value>
+                          <next>
+                            <block type="setTimeout" id="o),Sqnr~neuBM2}?DVCa">
+                              <value name="VALUE">
+                                <shadow type="math_number" id="DXBs|A}z2v4nTT*u^Cr)">
+                                  <field name="NUM">3</field>
+                                </shadow>
+                              </value>
+                              <statement name="DO">
+                                <block type="execScript" id="KGvK-O0/U?p$A_zA,Ymg">
+                                  <value name="TEXT">
+                                    <shadow type="textMultiline" id="dO%;[q!Q7p)eTARvh4X@">
+                                      <field name="HIGHLIGHT_MODE">javascript</field>
+                                      <field name="TEXT" editor-height="5" editor-width="520">avatar("Esta es la entrada de la planta.","../../resources/audio/bienvenido2.wav");</field>
+                                    </shadow>
+                                  </value>
+                                  <next>
+                                    <block type="tweenCameraExt" id="882y?;*j7~3om12HC^1s">
+                                      <mutation xmlns="http://www.w3.org/1999/xhtml" whenfinishedslot="false"></mutation>
+                                      <field name="MOVEMENT_TYPE">SPHERICAL</field>
+                                      <value name="POSITION">
+                                        <block type="objectList" id="r7U1I*eLm*zxRJIcI!8S">
+                                          <field name="FIELDNAME">inicio</field>
+                                        </block>
+                                      </value>
+                                      <value name="LOOKAT">
+                                        <block type="objectList" id="30^ZHe?yC9Xtsyn3kFvZ">
+                                          <field name="FIELDNAME">inicio_dir</field>
+                                        </block>
+                                      </value>
+                                      <value name="DURATION">
+                                        <shadow type="math_number" id="cMDJNZnD%|at(LYlwlzz">
+                                          <field name="NUM">1</field>
+                                        </shadow>
+                                      </value>
+                                      <next>
+                                        <block type="setTimeout" id="EYe7B$eKsM,qSpFoZ*6L">
+                                          <value name="VALUE">
+                                            <shadow type="math_number" id="tpSy{WS@%3v9V3Zmo5|V">
+                                              <field name="NUM">3</field>
+                                            </shadow>
+                                          </value>
+                                          <statement name="DO">
+                                            <block type="execScript" id="WP-)T|RtQ%Mji6eE3SlE">
+                                              <value name="TEXT">
+                                                <shadow type="textMultiline" id="qdYO(k~jY$zk+qGvid@U">
+                                                  <field name="HIGHLIGHT_MODE">javascript</field>
+                                                  <field name="TEXT" editor-height="5" editor-width="520">avatar("Esta planta procesa uno de los metales más valiosos del mundo. También maneja tres de las sustancias más peligrosas que existen en minería. En los próximos 30 minutos vas a recorrerla antes de poner un pie dentro. Lo que aprendas aquí podría ser la diferencia.","../../resources/audio/a.wav");</field>
+                                                </shadow>
+                                              </value>
+                                            </block>
+                                          </statement>
+                                        </block>
+                                      </next>
+                                    </block>
+                                  </next>
+                                </block>
+                              </statement>
+                            </block>
+                          </next>
+                        </block>
+                      </statement>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1180.1999999999998" viewport-y="37" viewport-w="798.8" viewport-h="448.5" viewport-hidden="true" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>
