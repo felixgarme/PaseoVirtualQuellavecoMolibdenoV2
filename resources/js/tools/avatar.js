@@ -22,7 +22,7 @@ window.avatar = (function() {
             
             burbujaTexto.style.fontSize = '12px';
             burbujaTexto.style.padding = '8px 12px';
-            burbujaTexto.style.marginLeft = '10px';
+            burbujaTexto.style.marginLeft = '20px';
             burbujaTexto.style.maxWidth = 'calc(40vw - 80px)';
             
             contenedor.style.transform = estaVisible ? 'translateX(0px)' : 'translateX(-120%)';
@@ -37,7 +37,7 @@ window.avatar = (function() {
             
             burbujaTexto.style.fontSize = '16px'; 
             burbujaTexto.style.padding = '12px 18px';
-            burbujaTexto.style.marginLeft = '12px';
+            burbujaTexto.style.marginLeft = '20px';
             burbujaTexto.style.maxWidth = 'calc(90vw - 120px)';
             
             contenedor.style.transform = estaVisible ? 'translateX(0px)' : 'translateX(-120%)';
@@ -52,7 +52,7 @@ window.avatar = (function() {
 
             burbujaTexto.style.fontSize = '20px';
             burbujaTexto.style.padding = '18px 28px';
-            burbujaTexto.style.marginLeft = '20px';
+            burbujaTexto.style.marginLeft = '25px';
             burbujaTexto.style.maxWidth = '350px';
 
             contenedor.style.transform = estaVisible ? 'translateY(-50%) translateX(0px)' : 'translateY(-50%) translateX(-120px)';

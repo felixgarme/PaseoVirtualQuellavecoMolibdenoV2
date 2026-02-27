@@ -1,3 +1,20 @@
+/* =========================================
+   Variables Globales
+   ========================================= */
+:root {
+    --panel-width: 450px;
+    /* Valor por defecto sugerido, cámbialo según necesites */
+    --color-primary: #0056b3;
+    --color-success: #27ae60;
+    --color-error: #eb4d4b;
+    --color-warning: #F37021;
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+/* =========================================
+   Contenedores Principales
+   ========================================= */
 #quiz-wrapper {
     position: fixed;
     top: 0;
@@ -12,14 +29,42 @@
 }
 
 .start-container {
-    pointer-events: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     gap: 20px;
+    pointer-events: auto;
 }
 
+/* =========================================
+   Panel Lateral (Quiz)
+   ========================================= */
+.quiz-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--panel-width);
+    height: 100vh;
+    padding: 32px 36px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.45s ease-in-out;
+}
+
+.quiz-panel.panel-active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* =========================================
+   Botones
+   ========================================= */
 .btn-start,
 .btn-skip,
 .btn-continue {
@@ -27,143 +72,147 @@
     font-weight: 800;
     letter-spacing: 2px;
     cursor: pointer;
+    border: none;
+    /* Previene estilos por defecto del navegador */
 }
 
 .btn-start {
-    background:#fff;
-    color:#0056b3;
-    padding:16px 44px;
-    box-shadow:0 12px 30px rgba(0,86,179,.18);
+    padding: 16px 44px;
+    background: var(--color-white);
+    color: var(--color-primary);
+    box-shadow: 0 12px 30px rgba(0, 86, 179, 0.18);
 }
 
 .btn-skip {
-    background:rgba(255,255,255,.2);
-    backdrop-filter:blur(5px);
-    border:2px solid #fff;
-    padding:14px 40px;
+    padding: 14px 40px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--color-white);
+    color: var(--color-white);
+    /* Agregado para que el texto sea visible */
 }
 
-.quiz-panel {
-    background:rgba(255,255,255,.98);
-    backdrop-filter:blur(12px);
-    width:var(--panel-width);
-    height:100vh;
-    padding:32px 36px;
-    position:fixed;
-    left:0;
-    top:0;
-    transform:translateX(-100%);
-    opacity:0;
-    visibility:hidden;
-    transition:.45s;
+.btn-continue {
+    display: none;
+    align-self: center;
+    padding: 16px 44px;
+    background: var(--color-success);
+    color: var(--color-white);
 }
 
-.quiz-panel.panel-active {
-    transform:translateX(0);
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-}
-
+/* =========================================
+   Cuadrícula de Opciones (Grid)
+   ========================================= */
 .items-list {
-    flex-grow:1;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    grid-template-rows:repeat(3,1fr);
-    gap:16px;
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 16px;
 }
 
+/* =========================================
+   Tarjetas Giratorias (Flip Cards)
+   ========================================= */
 .option-row {
-    perspective:1000px;
-    cursor:pointer;
+    perspective: 1000px;
+    cursor: pointer;
 }
 
 .option-inner {
-    position:relative;
-    width:100%;
-    height:100%;
-    transition:transform .6s;
-    transform-style:preserve-3d;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
 }
 
 .option-row.is-flipped .option-inner {
-    transform:rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .option-front,
 .option-back {
-    position:absolute;
-    width:100%;
-    height:100%;
-    backface-visibility:hidden;
-    border-radius:12px;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    background:#fff;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.option-front {
+    background: var(--color-white);
 }
 
 .option-back {
-    transform:rotateY(180deg);
-    background:#000;
+    background: var(--color-black);
+    transform: rotateY(180deg);
 }
 
+/* =========================================
+   Contenido de las Tarjetas
+   ========================================= */
 .cell-thumb {
-    flex:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 .option-thumb,
 .card-media {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .cell-title {
-    padding:8px;
-    text-align:center;
+    padding: 8px;
+    text-align: center;
 }
 
 .option-title {
-    font-size:12px;
-    font-weight:700;
+    font-size: 12px;
+    font-weight: 700;
 }
 
+/* =========================================
+   Estados de Validación
+   ========================================= */
 .option-front.is-correct,
 .option-back.is-correct {
-    border:3px solid #27ae60;
+    border: 3px solid var(--color-success);
 }
 
 .option-front.is-wrong,
 .option-back.is-wrong {
-    border:3px solid #eb4d4b;
+    border: 3px solid var(--color-error);
 }
 
+/* =========================================
+   Misceláneos
+   ========================================= */
 .progress-label {
-    margin-top:15px;
-    font-weight:bold;
-    color:#F37021;
-    text-align:center;
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--color-warning);
+    text-align: center;
 }
 
-.btn-continue {
-    background:#27ae60;
-    color:#fff;
-    padding:16px 44px;
-    display:none;
-    align-self:center;
-}
-
-@media (max-width:900px) {
+/* =========================================
+   Diseño Responsivo (Móviles/Tablets)
+   ========================================= */
+@media (max-width: 900px) {
     :root {
-        --panel-width:100%;
+        --panel-width: 100%;
     }
 
     .items-list {
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
+        /* Dependiendo de cuántos items tengas, podrías necesitar ajustar grid-template-rows aquí también */
     }
 }

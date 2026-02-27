@@ -95,6 +95,7 @@
       const maxDist = 35;
       if (dy > maxDist) dy = maxDist;
       if (dy < -maxDist) dy = -maxDist;
+      // joystickEjeY entregará un valor entre -1 y 1 según la inclinación
       joystickEjeY = dy / maxDist;
       knob.style.transform = `translate(-50%, calc(-50% + ${dy}px))`;
     };
@@ -238,26 +239,20 @@
     const cam = app.camera;
     const controls = app.controls;
 
-    // Se agrega el parámetro timestamp que envía requestAnimationFrame automáticamente
     function loop(timestamp) {
-      // --- CALCULO DEL DELTA TIME ---
       if (!tiempoAnterior) tiempoAnterior = timestamp;
       let dt = (timestamp - tiempoAnterior) / 1000;
       tiempoAnterior = timestamp;
 
-      // Si la pestaña está oculta o hay mucho lag, evitamos saltos extremos
       if (dt > 0.1 || dt <= 0) dt = 0.016;
-
-      // Factor multiplicador (será 1.0 si el juego va perfecto a 60FPS)
       const factorFps = dt * 60;
-      // -------------------------------
 
       let movimientoFotograma = 0;
       const sentido = obtenerDireccion(app);
 
       if (autoMoviendo) {
         const diff = distanciaObjetivo - distanciaActual;
-        const pasoReal = VELOCIDAD_AUTO * factorFps; // Velocidad estable
+        const pasoReal = VELOCIDAD_AUTO * factorFps;
 
         if (Math.abs(diff) <= pasoReal) {
           distanciaActual = distanciaObjetivo;
@@ -266,10 +261,14 @@
           movimientoFotograma = Math.sign(diff) * pasoReal;
         }
       } else {
+        // MOVIMIENTO POR TECLADO
         if (teclasMoviendo.adelante)
           movimientoFotograma += VELOCIDAD * factorFps * sentido;
         if (teclasMoviendo.atras)
           movimientoFotograma -= VELOCIDAD * factorFps * sentido;
+        
+        // MOVIMIENTO POR JOYSTICK (MODO CELULAR)
+        // Se aplica directamente el valor de joystickEjeY (-1 a 1) para que sea proporcional
         if (esMovil && joystickEjeY !== 0) {
           movimientoFotograma +=
             -joystickEjeY * VELOCIDAD_JOYSTICK * factorFps * sentido;
