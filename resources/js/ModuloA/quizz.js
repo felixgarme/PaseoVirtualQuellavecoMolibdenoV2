@@ -91,8 +91,9 @@
                     top: 0 !important;
                     right: 0 !important;
                     left: auto !important;
-                    width: 40vw !important; 
+                    width: 40% !important; 
                     height: 100vh !important;
+                    object-fit: contain !important;
                 }
                 .quiz-panel {
                     top: 0 !important; 
