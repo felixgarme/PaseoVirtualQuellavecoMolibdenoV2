@@ -1,7 +1,4 @@
 (function() {
-    // ==========================================
-    // 1. DATOS DEL QUIZ
-    // ==========================================
     const items = [
         { name: "Casco con visera y barbiquejo", procedure: "casco", correct: true, ids: ["Object004", "Object002"], audio: "../resources/audio/equipo/casco.wav", video: "videos/casco.mp4", image: "../resources/img/equipo/casco.png" },
         { name: "Lentes de seguridad", procedure: "lentes", correct: true, ids: ["LentesSeguridadHombre"], audio: "../resources/audio/equipo/lentes.wav", video: "videos/lentes.mp4", image: "../resources/img/equipo/lentes.png" },
@@ -20,104 +17,144 @@
     };
 
     let DOM = {};
+    let resizeObserver;
 
-    // ==========================================
-    // 2. INYECCIÓN DE ESTILOS DE PANTALLA DIVIDIDA
-    // ==========================================
     function injectSplitScreenStyles() {
         if (document.getElementById("quiz-split-styles")) return;
         
         const style = document.createElement("style");
         style.id = "quiz-split-styles";
         style.textContent = `
-            /* Contenedor principal de Verge3D */
-            #v3d-container {
-                transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), margin-left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-                width: 100vw; /* Ancho por defecto */
-            }
-
-            /* Clase que se aplica al activar el Quiz (Pantalla Dividida) */
-            #v3d-container.split-screen-active {
-                width: 40vw !important; /* El 3D ocupa el 40% */
-                margin-left: 0 !important;
-            }
-
-            /* Contenedor del Quiz */
             #quiz-wrapper {
-                position: fixed;
-                top: 0; left: 0; width: 100vw; height: 100vh;
-                pointer-events: none; z-index: 10000;
+                font-family: 'AA Smart Sans', sans-serif !important;
+                color: #031795 !important;
+                position: fixed !important;
+                top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important;
+                pointer-events: none !important; z-index: 10000 !important;
             }
 
-            /* Pantalla de Inicio (Botón Empezar) */
-            .start-container {
-                position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-                display: flex; align-items: center; justify-content: center; gap: 20px;
-                background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
-                pointer-events: auto; transition: opacity 0.3s ease;
+            .quiz-header h2 {
+                font-weight: bold !important;
+                color: #031795 !important;
+                margin-bottom: 5px;
             }
 
-            /* Panel del Quiz (El 60% derecho) */
+            .quiz-header p, .progress-label, .option-title {
+                color: #031795 !important;
+            }
+
+            .progress-label {
+                font-weight: bold;
+                text-align: center;
+                margin-top: 20px;
+                font-size: 18px;
+            }
+
+            #v3d-container {
+                position: fixed !important; 
+                transition: width 0.5s ease, height 0.5s ease !important;
+                z-index: 1 !important;
+            }
+
             .quiz-panel {
-                position: absolute; top: 0; right: 0;
-                width: 60vw; /* El Quiz ocupa el 60% */
-                height: 100vh;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                box-shadow: -5px 0 25px rgba(0,0,0,0.1);
-                transform: translateX(100%); /* Oculto a la derecha */
-                transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-                display: flex; flex-direction: column;
-                padding: 30px; box-sizing: border-box;
+                position: absolute !important; 
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(10px) !important;
+                transition: transform 0.5s ease !important;
+                display: flex !important; 
+                flex-direction: column !important;
+                padding: 30px !important; 
+                box-sizing: border-box !important;
                 pointer-events: none;
-                overflow-y: auto;
+                overflow-y: auto !important;
             }
 
             .quiz-panel.panel-active {
-                transform: translateX(0); /* Desliza hacia adentro */
-                pointer-events: auto;
+                pointer-events: auto !important;
             }
 
-            /* Responsivo para móviles (apilado en lugar de lado a lado) */
-            @media (max-width: 900px) {
+            .start-container {
+                position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+                display: flex; align-items: center; justify-content: center; gap: 20px;
+                background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+                pointer-events: auto; transition: opacity 0.3s ease;
+            }
+
+            .items-list {
+                display: grid;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            @media (orientation: landscape) {
                 #v3d-container.split-screen-active {
-                    width: 100vw !important;
-                    height: 40vh !important; /* 3D arriba */
+                    top: 0 !important;
+                    right: 0 !important;
+                    left: auto !important;
+                    width: 40vw !important; 
+                    height: 100vh !important;
                 }
                 .quiz-panel {
-                    width: 100vw;
-                    height: 60vh; /* Quiz abajo */
-                    top: auto; bottom: 0; right: auto; left: 0;
-                    transform: translateY(100%);
-                    border-radius: 20px 20px 0 0;
+                    top: 0 !important; 
+                    left: 0 !important; 
+                    right: auto !important;
+                    width: 60vw !important; 
+                    height: 100vh !important;
+                    box-shadow: 5px 0 25px rgba(0,0,0,0.15) !important;
+                    transform: translateX(-100%); /* Oculto a la izquierda */
                 }
                 .quiz-panel.panel-active {
-                    transform: translateY(0);
+                    transform: translateX(0) !important; 
+                }
+                .items-list {
+                    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                }
+            }
+
+            @media (orientation: portrait) {
+                #v3d-container.split-screen-active {
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100vw !important;
+                    height: 40vh !important; /* 3D Arriba */
+                }
+                .quiz-panel {
+                    width: 100vw !important;
+                    height: 60vh !important; /* Quiz Abajo */
+                    top: auto !important; 
+                    bottom: 0 !important; 
+                    left: 0 !important;
+                    transform: translateY(100%); /* Oculto abajo */
+                    border-radius: 20px 20px 0 0 !important;
+                    box-shadow: 0 -5px 25px rgba(0,0,0,0.15) !important;
+                }
+                .quiz-panel.panel-active {
+                    transform: translateY(0) !important; /* Sube desde abajo */
+                }
+                .items-list {
+                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 }
             }
         `;
         document.head.appendChild(style);
     }
 
-    // ==========================================
-    // 3. LÓGICA DEL COMPONENTE
-    // ==========================================
     function construirUI() {
         const wrapper = document.createElement("div");
         wrapper.id = "quiz-wrapper";
         wrapper.innerHTML = `
             <div class="start-container" id="screen-start">
-                <button class="btn-start" id="btn-run">Empezar Quiz</button>
-                ${state.cursoCompletado ? `<button class="btn-skip" id="btn-skip">Saltar</button>` : ""}
+                <button class="btn-start" id="btn-run" style="padding: 15px 30px; font-size: 18px; font-weight: bold; font-family: 'AA Smart Sans', sans-serif; background: #031795; color: white; border: none; border-radius: 50px; cursor: pointer;">Empezar Quiz</button>
+                ${state.cursoCompletado ? `<button class="btn-skip" id="btn-skip" style="padding: 15px 30px; font-size: 18px; font-weight: bold; font-family: 'AA Smart Sans', sans-serif; background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 50px; cursor: pointer;">Saltar</button>` : ""}
             </div>
-            <div class="quiz-panel" id="panel-right">
+            <div class="quiz-panel" id="panel-main">
                 <div class="quiz-header">
                     <h2>Selección de Equipo</h2>
                     <p>Encuentra los elementos de seguridad requeridos.</p>
                 </div>
                 <div class="items-list" id="list-target"></div>
                 <div class="progress-label" id="label-status">Progreso: 0 / ${state.requiredTotal}</div>
-                <button class="btn-continue" id="btn-continue" style="display: none;">Continuar</button>
+                <button class="btn-continue" id="btn-continue" style="display: none; padding: 15px 30px; font-size: 18px; font-weight: bold; font-family: 'AA Smart Sans', sans-serif; background: #27ae60; color: white; border: none; border-radius: 50px; cursor: pointer; align-self: center; margin-top: 20px;">Continuar</button>
             </div>
         `;
         document.body.appendChild(wrapper);
@@ -129,22 +166,24 @@
             btnContinue: document.getElementById("btn-continue"),
             btnSkip: document.getElementById("btn-skip"),
             btnRun: document.getElementById("btn-run"),
-            panelRight: document.getElementById("panel-right"),
+            panelMain: document.getElementById("panel-main"),
             screenStart: document.getElementById("screen-start"),
             v3dContainer: document.getElementById("v3d-container")
         };
     }
 
-    // Forza un evento de resize en la ventana para que el canvas de Verge3D (o Three.js) se ajuste al nuevo tamaño (40%)
-    function forzarAjusteCanvas3D() {
-        let tiempoInicio = Date.now();
-        function ajustar() {
-            window.dispatchEvent(new Event('resize'));
-            if (Date.now() - tiempoInicio < 600) { // Sigue ajustando durante la transición CSS (0.5s)
-                requestAnimationFrame(ajustar);
-            }
+    function iniciarObservadorDeRedimension() {
+        if (!DOM.v3dContainer || resizeObserver) return;
+        resizeObserver = new ResizeObserver(() => window.dispatchEvent(new Event('resize')));
+        resizeObserver.observe(DOM.v3dContainer);
+    }
+
+    function detenerObservadorDeRedimension() {
+        if (resizeObserver && DOM.v3dContainer) {
+            resizeObserver.unobserve(DOM.v3dContainer);
+            resizeObserver.disconnect();
+            resizeObserver = null;
         }
-        ajustar();
     }
 
     function ejecutarProcedimientoV3D(nombreProcedimiento) {
@@ -161,30 +200,29 @@
     }
 
     function cerrarQuiz() {
-        DOM.panelRight.classList.remove("panel-active");
-        if (DOM.v3dContainer) {
-            DOM.v3dContainer.classList.remove("split-screen-active");
-        }
-        forzarAjusteCanvas3D();
+        DOM.panelMain.classList.remove("panel-active");
+        if (DOM.v3dContainer) DOM.v3dContainer.classList.remove("split-screen-active");
+        
         ejecutarProcedimientoV3D("continuar");
 
         setTimeout(() => {
             if (DOM.wrapper) DOM.wrapper.remove();
+            detenerObservadorDeRedimension(); 
         }, 600);
     }
 
-    // ==========================================
-    // 4. CREACIÓN DE TARJETAS
-    // ==========================================
     function crearTarjeta(item) {
         const row = document.createElement("div");
         row.className = "option-row";
-        // HTML simplificado para el ejemplo, asume que tienes el CSS de las tarjetas cargado
         row.innerHTML = `
-            <div class="option-inner">
-                <div class="option-front">
-                    <img src="${item.image}" class="option-thumb" alt="${item.name}">
-                    <div class="option-title">${item.name}</div>
+            <div class="option-inner" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor:pointer; height: 100%; border: 3px solid transparent; transition: all 0.3s ease;">
+                <div class="option-front" style="display: flex; flex-direction: column; height: 100%;">
+                    <div style="flex: 1; padding: 10px; display: flex; justify-content: center; align-items: center; background: #f8f9fa;">
+                        <img src="${item.image}" alt="${item.name}" style="max-width: 100%; max-height: 100px; object-fit: contain;">
+                    </div>
+                    <div class="option-title" style="padding: 10px; text-align: center; font-weight: bold; font-size: 13px; border-top: 1px solid #eee;">
+                        ${item.name}
+                    </div>
                 </div>
             </div>
         `;
@@ -192,47 +230,56 @@
         row.onclick = () => {
             if (state.isLocked || row.dataset.counted) return;
 
-            // Simulación de acierto
             if (item.correct) {
-                row.style.border = "3px solid #27ae60"; // CSS inline por simplicidad
+                row.querySelector('.option-inner').style.borderColor = "#27ae60"; 
+                row.querySelector('.option-inner').style.background = "#eafaf1";
+                
                 state.count++;
                 row.dataset.counted = "true";
                 DOM.statusLabel.textContent = `Progreso: ${state.count} / ${state.requiredTotal}`;
                 
                 ejecutarProcedimientoV3D(item.procedure);
                 if (item.ids && window.mostrar) item.ids.forEach(id => window.mostrar(id));
-                revisarProgreso();
+                
+                if (item.audio) {
+                    state.isLocked = true;
+                    const sound = new Audio(item.audio);
+                    
+                    const unlockUI = () => {
+                        state.isLocked = false;
+                        revisarProgreso();
+                    };
+
+                    sound.play().catch(e => {
+                        console.error("Error al reproducir audio:", e);
+                        unlockUI();
+                    });
+                    sound.onended = unlockUI;
+                } else {
+                    revisarProgreso();
+                }
             }
         };
         return row;
     }
 
-    // ==========================================
-    // 5. API PÚBLICA (window.inicio)
-    // ==========================================
     window.inicio = function() {
-        if (document.getElementById("quiz-wrapper")) return; // Evita inicialización múltiple
+        if (document.getElementById("quiz-wrapper")) return;
 
-        // Reset estado por si se llama varias veces
         state.count = 0;
         state.isLocked = false;
 
         injectSplitScreenStyles();
         construirUI();
 
-        // Eventos de inicio
         DOM.btnRun.onclick = () => {
-            DOM.screenStart.style.opacity = "0"; // Desvanece el overlay negro
+            DOM.screenStart.style.opacity = "0"; 
             
-            // Activa el modo Split Screen
-            if (DOM.v3dContainer) {
-                DOM.v3dContainer.classList.add("split-screen-active");
-            }
-            DOM.panelRight.classList.add("panel-active");
-            
-            // Avisa al motor 3D que el tamaño cambió
-            forzarAjusteCanvas3D();
+            iniciarObservadorDeRedimension();
 
+            if (DOM.v3dContainer) DOM.v3dContainer.classList.add("split-screen-active");
+            DOM.panelMain.classList.add("panel-active");
+            
             setTimeout(() => {
                 DOM.screenStart.style.display = "none";
                 items.forEach(item => DOM.listTarget.appendChild(crearTarjeta(item)));
@@ -244,9 +291,7 @@
             cerrarQuiz();
         };
 
-        if (DOM.btnSkip) {
-            DOM.btnSkip.onclick = cerrarQuiz;
-        }
+        if (DOM.btnSkip) DOM.btnSkip.onclick = cerrarQuiz;
     };
 
 })();
